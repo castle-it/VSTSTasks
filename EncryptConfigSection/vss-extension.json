@@ -1,0 +1,61 @@
+{
+    "manifestVersion": 1,
+    "id": "EncryptConfig",
+    "version": "1.0.0",
+    "name": "Encrypt Config File",
+    "publisher": "mdjawed",
+    "description": "Encrypt section of Config File Using aspnet_regiis.",
+	"public": true,
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],    
+    "icons": {
+        "default": "images/logo.png"
+    },
+    "categories": [
+        "Build and release"
+    ],
+    "tags": [
+        "Release",
+        "Service",
+        "Encrypt",
+		"Configuration",
+		"aspnet_regiis"
+    ],
+	 "files": [
+        {
+            "path": "Programs"
+            
+        }
+    ],
+	"contributions": [
+        {
+            "id": "EncryptConfig",
+            "type": "ms.vss-distributed-task.task",
+            "description": "Encrypt section of Config File Using aspnet_regiis.",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "Programs"
+            }
+        }
+    ],
+    "screenshots": [
+        {
+            "path": "images/Add-Task.PNG"
+        }
+    ],
+    "content": {
+        "details": {
+            "path": "overview.md"
+        }
+    },
+   
+    "branding": {
+        "color": "rgb(255, 255, 255)",
+        "theme": "light"
+    }
+}
