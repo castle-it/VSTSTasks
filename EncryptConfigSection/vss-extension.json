@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1,
     "id": "EncryptConfig",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "name": "Encrypt Config File",
     "publisher": "mdjawed",
     "description": "Encrypt section of Config File Using aspnet_regiis.",

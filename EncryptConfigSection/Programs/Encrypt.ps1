@@ -21,12 +21,12 @@ $exitCode =0
 try
 {
   
-  
 # Get the inputs.
 [string]$configFilePath = Get-VstsInput -Name configFilePath
 [string]$configFilePattern = Get-VstsInput -Name configFilePattern
 [string]$sectionName = Get-VstsInput -Name sectionName
 [string]$dataProtectionProvider = Get-VstsInput -Name dataProtectionProvider
+[string]$customDataProtectionProvider = Get-VstsInput -Name customDataProtectionProvider
 [string]$ToComment = Get-VstsInput -Name ToComment
 [bool]$SectionToCommentsInConfig = Get-VstsInput -Name 'SectionToCommentsInConfig' -AsBool
 [bool]$RecursiveBool = Get-VstsInput -Name 'Recursive' -AsBool
@@ -44,6 +44,7 @@ $exitCode = 0
 " Config File Pattern: $configFilePattern"
 " section Name: $sectionName"
 " Data Protection Provider: $dataProtectionProvider"
+" Custom Data Protection Provider: $customDataProtectionProvider"
 " Section To Comment: $SectionToCommentsInConfig"
 #################################################################################
 
@@ -54,6 +55,16 @@ if(!(Test-Path -Path "$configFilePath"))
 
     $(throw "Config Path $configFilePath does not exist.")
 
+}
+
+#determine what provider to use
+if ($dataProtectionProvider -eq "Custom") 
+{
+    $protectionProvider = $customDataProtectionProvider;
+}
+else 
+{
+    $protectionProvider = $dataProtectionProvider;
 }
 
 ##################### Funtion to comments custom section from config before encrytion ########
@@ -118,7 +129,7 @@ $configurationFileMap = New-Object -TypeName System.Configuration.ExeConfigurati
         if (-not $section.SectionInformation.IsProtected)
         {
           Write-Host "Encrypting configuration section for File: $configPath  ..."
-          $section.SectionInformation.ProtectSection($dataProtectionProvider);
+          $section.SectionInformation.ProtectSection($protectionProvider);
           $section.SectionInformation.ForceSave = [System.Boolean]::True;
           $configuration.Save([System.Configuration.ConfigurationSaveMode]::Modified);
           Write-Host "Section $sectionName succesfuly Encrypted!"
